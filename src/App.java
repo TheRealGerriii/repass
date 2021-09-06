@@ -11,17 +11,17 @@ public class App {
         //Verzió kiírása
         System.out.println("Verzió: 0.0.1");
         
-        //Az a objektummal kérhetünk be a konzolról
-        Scanner a = new Scanner(System.in);
+        //Az scan objektummal kérhetünk be a konzolról
+        Scanner scan = new Scanner(System.in);
 
         System.out.print("Felhasználónév: ");
-        // A b változó tárolja a jelszót
-        String b = a.nextLine();
+        // A name változó tárolja a felhasználónevet
+        String name = scan.nextLine();
         System.out.print("Jelszó: ");
-        String c = a.nextLine();
+        String password = scan.nextLine();
         System.out.print("Hely: ");
-        String d = a.nextLine();
-        a.close();
+        String place = scan.nextLine();
+        scan.close();
         int iSiker = 0;
         try {
             /* 
@@ -29,15 +29,15 @@ public class App {
             használati helye a passList 
             objektumban van tárolva            
             */
-            Store passList = new Store(b, c, d);
-            FileWriter f = new FileWriter("pass.txt");
-            PrintWriter pwr = new PrintWriter(f);
+            Store passList = new Store(name, password, place);
+            FileWriter filewriter = new FileWriter("pass.txt");
+            PrintWriter pwr = new PrintWriter(filewriter);
             pwr.print(passList.user);
             if(!passList.hollow()) { pwr.print(passList.retrieval()); }
             pwr.print(passList.place);
             pwr.close();
             iSiker = 1;
-        } catch (IOException e) {
+        } catch (IOException ex) {
             System.err.println("Hiba! A fájlbaírás sikertelen. Keresse meg a fejlesztőt.");
         }
 
